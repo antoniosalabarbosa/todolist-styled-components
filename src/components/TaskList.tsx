@@ -1,17 +1,16 @@
 import React from "react";
-// import Task from "./Task";
+import Task from "./Task";
 import { TaskContainer_SC } from "../styles/components/TaskStyles";
-import { ResponseJSON } from "../ts/interfaces";
+import { ResponseTasks } from "../ts/interfaces";
 
 const TaskList = ()=>{
 
-    const [tasks, setTasks] = React.useState<ResponseJSON[] | null>(null);
+    const [tasks, setTasks] = React.useState<ResponseTasks[] | null>(null);
 
     const getTasks = async ()=>{
-        const response: ResponseJSON[] = await fetch("../json/tasks.json")
+        const response: ResponseTasks[] = await fetch("http://127.0.0.1:3001/tasks")
         .then(r => r.json());
 
-        console.log(response);
         setTasks(response);
 
         return response;
@@ -19,15 +18,23 @@ const TaskList = ()=>{
 
     React.useEffect(()=>{
         getTasks();
-    }, [])
-
-    React.useEffect(()=>{
-        if(tasks) console.log(tasks);
-    }, [tasks])
+    }, []);
 
     return (
         <TaskContainer_SC>
-            
+            {
+                (tasks) ?
+                tasks.map( ({ _id, task }: ResponseTasks) => {
+                    return (
+                        <Task
+                            key={_id}
+                            _id={_id}
+                            task={task}
+                        />
+                    );
+                })
+                : <strong>No have tasks</strong>
+            }
         </TaskContainer_SC>
     );
 };

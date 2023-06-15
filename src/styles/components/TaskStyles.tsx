@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { $blue0, $white } from "../variables";
+import { $blue0, $white, $gray } from "../variables";
 
 export const TaskContainer_SC = styled.div`
     width: 100vw;
@@ -21,6 +21,12 @@ export const LabelBox_SC = styled.label`
 export const Span_SC = styled.span`
     width: 100vw;
     max-width: 400px;
+    font-size: 1.5rem;
+`;
+
+export const Input_SC = styled.input`
+    border: 2px solid ${$gray};
+    padding: 5px 10px;
     font-size: 1.5rem;
 `;
 

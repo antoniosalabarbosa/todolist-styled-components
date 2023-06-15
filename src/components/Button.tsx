@@ -1,12 +1,12 @@
+// import React from "react";
 import { Button_SC } from "../styles/components/TaskStyles";
+import { ButtonProps } from "../ts/interfaces";
 
-interface Button_Props {
-    value: string
-}
-
-const Button = ( { value } : Button_Props)=>{
+const Button = ( { children, onClick }: ButtonProps )=>{
     return (
-        <Button_SC>{ value }</Button_SC>
+        <Button_SC onClick={onClick ? onClick : undefined}>
+            { children }
+        </Button_SC>
     );
 };
 

@@ -1,27 +1,52 @@
-// import React from "react";
+import React from "react";
 import Button from "./Button";
-import { 
-    LabelBox_SC,
-    Span_SC
-} from "../styles/components/TaskStyles";
+import Input from "./Input";
+import { LabelBox_SC, Span_SC } from "../styles/components/TaskStyles";
+import { ResponseTasks } from "../ts/interfaces";
 
-interface Task_Props {
-    id: string
-    value: string,
-}
+const Task = ( { _id, task } : ResponseTasks )=>{
 
-const Task = ( { id, value } : Task_Props )=>{
+    const [spanView, setSpanView] = React.useState(true);
+
     return(
-        <LabelBox_SC htmlFor={id}>
+        <LabelBox_SC htmlFor={_id}>
 
-            <input type="checkbox" name="" id={id} />
+            <input type="checkbox" name="" id={_id} />
 
-            <Span_SC id={id}>
-                { value }
-            </Span_SC>
+            {
+                (spanView) ? 
+                (
+                    <React.Fragment>
+                        <Span_SC id={_id}>
+                            { task }
+                        </Span_SC>
 
-            <Button value="Edit" />
-            <Button value="Delete" />
+                        <Button onClick={()=> { setSpanView(!spanView) }}>
+                            Edit
+                        </Button>
+                    </React.Fragment>
+                )
+                :
+                (
+                    <React.Fragment>
+                        <Input
+                            id={_id}
+                            task={task}
+                        />
+
+                        <Button 
+                            onClick={async ()=>{
+
+                            }}>
+                            Save
+                        </Button>
+                    </React.Fragment>
+                )
+            }
+
+            <Button>
+                Delete
+            </Button>
             
         </LabelBox_SC>
     );
