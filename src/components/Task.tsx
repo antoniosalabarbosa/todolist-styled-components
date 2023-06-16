@@ -7,6 +7,35 @@ import { ResponseTasks } from "../ts/interfaces";
 const Task = ( { _id, task } : ResponseTasks )=>{
 
     const [spanView, setSpanView] = React.useState(true);
+    // const [inputTaskValue, setInputTaskValue] = React.useState(task);
+
+    const putTask = async ({ target }: { target: unknown })=> {
+        if(
+            (target) && (target instanceof HTMLButtonElement) &&
+            (target.previousElementSibling) && 
+            (target.previousElementSibling instanceof HTMLInputElement)
+        ){
+            const input = target.previousElementSibling;
+            
+            try{
+                await fetch(`http://127.0.0.1:3001/tasks/:${input.id}`, {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({
+                        id: input.id,
+                        task: input.value
+                    })
+                });
+            }
+            catch(error){
+                console.log("Error: 'putTask' not working")
+            }
+
+            return true;
+        }
+
+        return false;
+    };
 
     return(
         <LabelBox_SC htmlFor={_id}>
@@ -35,9 +64,7 @@ const Task = ( { _id, task } : ResponseTasks )=>{
                         />
 
                         <Button 
-                            onClick={async ()=>{
-
-                            }}>
+                            onClick={putTask}>
                             Save
                         </Button>
                     </React.Fragment>
