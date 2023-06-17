@@ -3,38 +3,32 @@ import Button from "./Button";
 import Input from "./Input";
 import { LabelBox_SC, Span_SC } from "../styles/components/TaskStyles";
 import { ResponseTasks } from "../ts/interfaces";
+import { putOneTask } from "./Axios";
 
 const Task = ( { _id, task } : ResponseTasks )=>{
 
     const [spanView, setSpanView] = React.useState(true);
-    // const [inputTaskValue, setInputTaskValue] = React.useState(task);
 
-    const putTask = async ({ target }: { target: unknown })=> {
+    const putTask = async (id: string, value: string)=>{
+        try{
+            await putOneTask(id, value)
+            .then(()=> console.log("ok"));
+        }
+        catch(error){
+            console.log(error, "Error: put");
+        }
+    };
+
+    const getIdValue = ({ target }: { target: unknown })=> {
         if(
             (target) && (target instanceof HTMLButtonElement) &&
             (target.previousElementSibling) && 
             (target.previousElementSibling instanceof HTMLInputElement)
         ){
-            const input = target.previousElementSibling;
-            
-            try{
-                await fetch(`http://127.0.0.1:3001/tasks/:${input.id}`, {
-                    method: "POST",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({
-                        id: input.id,
-                        task: input.value
-                    })
-                });
-            }
-            catch(error){
-                console.log("Error: 'putTask' not working")
-            }
+            const { id, value }  = target.previousElementSibling;
 
-            return true;
+            putTask(id, value);
         }
-
-        return false;
     };
 
     return(
@@ -64,7 +58,7 @@ const Task = ( { _id, task } : ResponseTasks )=>{
                         />
 
                         <Button 
-                            onClick={putTask}>
+                            onClick={getIdValue}>
                             Save
                         </Button>
                     </React.Fragment>

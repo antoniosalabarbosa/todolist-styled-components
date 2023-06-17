@@ -2,27 +2,22 @@ import React from "react";
 import Task from "./Task";
 import { TaskContainer_SC } from "../styles/components/TaskStyles";
 import { ResponseTasks } from "../ts/interfaces";
+import { getAllTasks } from "./Axios";
 
 const TaskList = ()=>{
 
     const [tasks, setTasks] = React.useState<ResponseTasks[] | null>(null);
 
-    const getTasks = async ()=>{
-        try{
-            const response: ResponseTasks[] = await fetch("http://127.0.0.1:3001/tasks")
-            .then(r => r.json());
-
-            setTasks(response);
-
-            return response;
-        }
-        catch(error){
-            return "No tasks";
-        }
+    const searchTasks = async ()=>{
+        return await getAllTasks()
+        .then((res)=>{
+            setTasks(res);
+            return res;
+        });
     };
 
     React.useEffect(()=>{
-        getTasks();
+        searchTasks();
     }, []);
 
     return (
