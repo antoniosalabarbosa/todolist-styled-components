@@ -17,7 +17,6 @@ export const LabelBox_SC = styled.label`
     column-gap: 10px;
 `;
 
-
 export const Span_SC = styled.span`
     width: 100vw;
     max-width: 400px;

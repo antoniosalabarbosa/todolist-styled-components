@@ -4,7 +4,7 @@ import {
 } from "react";
 
 export interface ResponseTasks {
-    _id: string,
+    id: string,
     task: string,
 }
 

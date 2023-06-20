@@ -24,11 +24,11 @@ const TaskList = ()=>{
         <TaskContainer_SC>
             {
                 (tasks) ?
-                tasks.map( ({ _id, task }: ResponseTasks) => {
+                tasks.map( ({ id, task }: ResponseTasks) => {
                     return (
                         <Task
-                            key={_id}
-                            _id={_id}
+                            key={id + task}
+                            id={id}
                             task={task}
                         />
                     );

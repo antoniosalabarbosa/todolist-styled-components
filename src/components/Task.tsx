@@ -3,44 +3,23 @@ import Button from "./Button";
 import Input from "./Input";
 import { LabelBox_SC, Span_SC } from "../styles/components/TaskStyles";
 import { ResponseTasks } from "../ts/interfaces";
-import { putOneTask } from "./Axios";
 
-const Task = ( { _id, task } : ResponseTasks )=>{
+const Task = ( { id, task } : ResponseTasks )=>{
 
     const [spanView, setSpanView] = React.useState(true);
 
-    const putTask = async (id: string, value: string)=>{
-        try{
-            await putOneTask(id, value)
-            .then(()=> console.log("ok"));
-        }
-        catch(error){
-            console.log(error, "Error: put");
-        }
-    };
 
-    const getIdValue = ({ target }: { target: unknown })=> {
-        if(
-            (target) && (target instanceof HTMLButtonElement) &&
-            (target.previousElementSibling) && 
-            (target.previousElementSibling instanceof HTMLInputElement)
-        ){
-            const { id, value }  = target.previousElementSibling;
-
-            putTask(id, value);
-        }
-    };
 
     return(
-        <LabelBox_SC htmlFor={_id}>
+        <LabelBox_SC htmlFor={id}>
 
-            <input type="checkbox" name="" id={_id} />
+            <input type="checkbox" name="" id={id} />
 
             {
                 (spanView) ? 
                 (
                     <React.Fragment>
-                        <Span_SC id={_id}>
+                        <Span_SC id={id}>
                             { task }
                         </Span_SC>
 
@@ -53,12 +32,11 @@ const Task = ( { _id, task } : ResponseTasks )=>{
                 (
                     <React.Fragment>
                         <Input
-                            id={_id}
+                            id={id}
                             task={task}
                         />
 
-                        <Button 
-                            onClick={getIdValue}>
+                        <Button onClick={()=>{  }}>
                             Save
                         </Button>
                     </React.Fragment>
