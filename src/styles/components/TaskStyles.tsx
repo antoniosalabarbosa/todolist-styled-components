@@ -13,7 +13,8 @@ export const LabelBox = styled.label`
     width: 100%;
     margin: 0 0 10px 0;
     display: grid;
-    grid-template-columns: 30px clamp(100px, 100vw, 400px) 100px 100px;
+    grid-template-columns: 30px clamp(50px, 50vw, 300px) 1fr 1fr;
+    align-items: center;
     column-gap: 10px;
 `;
 
@@ -30,7 +31,7 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-    padding: 3px 10px;
+    padding: 10px 15px;
     color: ${$white};
     font-size: 1rem;
     background-color: ${$blue0};

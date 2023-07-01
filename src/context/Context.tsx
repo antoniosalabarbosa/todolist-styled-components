@@ -1,9 +1,13 @@
 import React from "react";
-import { getAllTasks } from "../components/Axios";
+import { getAllTasks, putOneTask } from "../components/Axios";
 
 const value = {
     async callGetTasks(){
         return await getAllTasks();
+    },
+
+    async callPutOneTask(id: string, task: string){
+        return await putOneTask(id, task);
     }
 };
 
