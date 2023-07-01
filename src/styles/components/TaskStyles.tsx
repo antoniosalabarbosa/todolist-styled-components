@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { $blue0, $white, $gray } from "../variables";
 
-export const TaskContainer_SC = styled.div`
+export const Container = styled.div`
     width: 100vw;
     max-width: 600px;
     display: flex;
@@ -9,7 +9,7 @@ export const TaskContainer_SC = styled.div`
     align-items: center;
 `;
 
-export const LabelBox_SC = styled.label`
+export const LabelBox = styled.label`
     width: 100%;
     margin: 0 0 10px 0;
     display: grid;
@@ -17,19 +17,19 @@ export const LabelBox_SC = styled.label`
     column-gap: 10px;
 `;
 
-export const Span_SC = styled.span`
+export const Span = styled.span`
     width: 100vw;
     max-width: 400px;
     font-size: 1.5rem;
 `;
 
-export const Input_SC = styled.input`
+export const Input = styled.input`
     border: 2px solid ${$gray};
     padding: 5px 10px;
     font-size: 1.5rem;
 `;
 
-export const Button_SC = styled.button`
+export const Button = styled.button`
     padding: 3px 10px;
     color: ${$white};
     font-size: 1rem;
