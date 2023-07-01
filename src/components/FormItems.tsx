@@ -15,7 +15,10 @@ export const ViewTask = ({ _id, task }: ResponseTasks)=>{
 
     return (
         <SC.LabelBox htmlFor={_id}>
-            <input type="checkbox" id={_id} />
+            <input
+                type="checkbox" 
+                id={_id}
+            />
             
             {
                 spanView 

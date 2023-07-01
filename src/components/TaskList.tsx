@@ -7,8 +7,14 @@ import * as FormItems from "../components/FormItems";
 const TaskList = ()=>{
 
     const context = React.useContext(Context);
-    const [tasksReducer, _setTasksReducer] = React.useReducer( context.callGetTasks,  context.callGetTasks());
+    const [tasksReducer] = React.useReducer( context.callGetTasks,  context.callGetTasks());
     const [tasks, setTasks] = React.useState<ResponseTasks[] | null>(null);
+
+    const [search, setSearch] = React.useState("");
+    
+    const filteredTasks = (search.length > 0 && tasks) ?
+    tasks.filter(item => item.task.includes(search))
+    : tasks;
 
     React.useEffect(()=>{
         Promise.all([tasksReducer])
@@ -17,20 +23,26 @@ const TaskList = ()=>{
 
     return (
         <SC.Container>
+
+            <SC.Input 
+                type="text"
+                onChange={e => setSearch(e.target.value)}
+                value={search}
+            />
+
             {
-                tasks
-                ?
-                tasks.map( ({_id, task}) => {
+                (filteredTasks) ? 
+                filteredTasks.map(({_id, task})=>{
                     return (
                         <FormItems.ViewTask 
                             key={_id}
                             _id={_id} 
                             task={task} 
                         />
-                    )
+                    );
                 })
                 :
-                false
+                <p>Tasks not found</p>
             }
         </SC.Container>
     );
