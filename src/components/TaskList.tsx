@@ -7,7 +7,7 @@ import * as FormItems from "../components/FormItems";
 const TaskList = ()=>{
 
     const context = React.useContext(Context);
-    const [tasksReducer, setTasksReducer] = React.useReducer( context.callGetTasks,  context.callGetTasks());
+    const [tasksReducer, _setTasksReducer] = React.useReducer( context.callGetTasks,  context.callGetTasks());
     const [tasks, setTasks] = React.useState<ResponseTasks[] | null>(null);
 
     React.useEffect(()=>{

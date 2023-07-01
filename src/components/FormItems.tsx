@@ -1,34 +1,43 @@
-// import React from "react";
+import React from "react";
 import { ResponseTasks } from "../ts/interfaces";
+import * as SC from "../styles/components/TaskStyles";
 
 export const ViewTask = ({ _id, task }: ResponseTasks)=>{
+
+    const [spanView, setSpanView] = React.useState(true);
+    const input = React.useRef<HTMLInputElement>();
+    const [inputValue, setInputValue] = React.useState(task);
+
     return (
-        <label htmlFor={_id}>
+        <SC.LabelBox htmlFor={_id}>
             <input type="checkbox" id={_id} />
-            <span>{task}</span>
+            
+            {
+                spanView 
+                ?
+                <SC.Span>{task}</SC.Span>
+                :
+                <SC.Input
+                    ref={input as React.MutableRefObject<HTMLInputElement>}
+                    type="text" 
+                    value={inputValue} 
+                    onChange={()=> {
+                        if(input.current){
+                            setInputValue(input.current.value)
+                        }
+                    }}
+                />
+            }
 
-            <div>
-                <button>Edit</button>
-                <button>Delete</button>
-            </div>
-        </label>
-    );
-}
+            {
+                spanView
+                ?
+                <SC.Button onClick={() => setSpanView(!spanView)}>Edit</SC.Button>
+                :
+                <SC.Button onClick={() => setSpanView(!spanView)}>Save</SC.Button>
+            }
 
-export const Span = ()=>{
-    return (
-        <span></span>
-    );
-};
-
-export const Button = ()=>{
-    return (
-        <button></button>
-    );
-};
-
-export const Input = ()=>{
-    return (
-        <input type="text" name="" id="" />
+            <SC.Button>Delete</SC.Button>
+        </SC.LabelBox>
     );
 };
