@@ -3,23 +3,22 @@ import Button from "./Button";
 import Input from "./Input";
 import { LabelBox_SC, Span_SC } from "../styles/components/TaskStyles";
 import { ResponseTasks } from "../ts/interfaces";
+import { putOneTask } from "./Axios";
 
-const Task = ( { id, task } : ResponseTasks )=>{
+const Task = ( { _id, task } : ResponseTasks )=>{
 
     const [spanView, setSpanView] = React.useState(true);
 
-
-
     return(
-        <LabelBox_SC htmlFor={id}>
+        <LabelBox_SC htmlFor={_id}>
 
-            <input type="checkbox" name="" id={id} />
+            <input type="checkbox" name="" id={_id} />
 
             {
                 (spanView) ? 
                 (
                     <React.Fragment>
-                        <Span_SC id={id}>
+                        <Span_SC id={_id}>
                             { task }
                         </Span_SC>
 
@@ -32,11 +31,11 @@ const Task = ( { id, task } : ResponseTasks )=>{
                 (
                     <React.Fragment>
                         <Input
-                            id={id}
+                            id={_id}
                             task={task}
                         />
 
-                        <Button onClick={()=>{  }}>
+                        <Button onClick={()=> putOneTask(_id, task)}>
                             Save
                         </Button>
                     </React.Fragment>

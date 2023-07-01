@@ -4,11 +4,16 @@ import {
 } from "react";
 
 export interface ResponseTasks {
-    id: string,
+    _id: string,
     task: string,
 }
 
 export interface ButtonProps {
     children: ReactNode
     onClick?: MouseEventHandler<HTMLButtonElement>,
+}
+
+export interface TaskSelected {
+    id: string,
+    task: string
 }

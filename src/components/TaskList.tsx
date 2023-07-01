@@ -8,9 +8,8 @@ const TaskList = ()=>{
 
     const [tasks, setTasks] = React.useState<ResponseTasks[] | null>(null);
 
-    const searchTasks = async ()=>{
-        return await getAllTasks()
-        .then((res)=>{
+    const searchTasks = ()=>{
+        getAllTasks().then((res)=>{
             setTasks(res);
             return res;
         });
@@ -24,11 +23,11 @@ const TaskList = ()=>{
         <TaskContainer_SC>
             {
                 (tasks) ?
-                tasks.map( ({ id, task }: ResponseTasks) => {
+                tasks.map( ({ _id, task }: ResponseTasks) => {
                     return (
                         <Task
-                            key={id + task}
-                            id={id}
+                            key={_id}
+                            _id={_id}
                             task={task}
                         />
                     );
