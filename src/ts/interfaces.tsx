@@ -12,6 +12,7 @@ export type MutableRef<T> = MutableRefObject<T>;
 export interface ResponseTasks {
     _id: string,
     task: string,
+    checked: boolean,
     updateTasksReducer?: DispatchWithoutAction
 }
 

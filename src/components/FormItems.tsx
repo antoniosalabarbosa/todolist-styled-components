@@ -7,7 +7,7 @@ import {
     ModalTasks
 } from "../ts/interfaces";
 
-export const ViewTask = ({ _id, task, updateTasksReducer }: ResponseTasks) => {
+export const ViewTask = ({ _id, task, checked, updateTasksReducer }: ResponseTasks) => {
 
     const { callPutOneTask, callDeleteOneTask } = React.useContext(Context);
 
@@ -16,10 +16,20 @@ export const ViewTask = ({ _id, task, updateTasksReducer }: ResponseTasks) => {
     const span = React.useRef<HTMLSpanElement>();
     const [inputValue, setInputValue] = React.useState(task);
     const [spanValue, setSpanValue] = React.useState(task);
+    const [checkedValue, setCheckedValue] = React.useState(checked);
 
     return (
-        <SC.LabelBox htmlFor={_id}>
-            <input type="checkbox" id={_id} />
+        <SC.LabelBox 
+            htmlFor={_id} 
+            className={checkedValue ? "checked" : ""}
+        >
+
+            <input 
+                type="checkbox" 
+                id={_id}
+                checked={checkedValue}
+                onChange={e => setCheckedValue(e.target.checked)}
+            />
 
             {
                 spanView

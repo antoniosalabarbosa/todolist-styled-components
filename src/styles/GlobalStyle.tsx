@@ -63,6 +63,11 @@ const GlobalStyle = createGlobalStyle`
         margin: 20px 0;
         font-size: 2rem;
     }
+
+    input[type="checkbox"]:checked ~ span{
+        font-weight: bold;
+        text-decoration: line-through;
+    }
 `;
 
 export default GlobalStyle;

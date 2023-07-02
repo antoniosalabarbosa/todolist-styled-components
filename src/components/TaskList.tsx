@@ -35,12 +35,13 @@ const TaskList = ()=>{
 
             {
                 (filteredTasks) ? 
-                filteredTasks.map(({_id, task})=>{
+                filteredTasks.map(({_id, task, checked})=>{
                     return (
-                        <FormItems.ViewTask 
+                        <FormItems.ViewTask
                             key={_id}
                             _id={_id} 
-                            task={task} 
+                            task={task}
+                            checked={checked}
                             updateTasksReducer={updateTasksReducer}
                         />
                     );
