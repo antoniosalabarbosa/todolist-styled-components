@@ -62,8 +62,11 @@ export const ViewTask = ({ _id, task }: ResponseTasks) => {
     );
 };
 
-export const ModalTask = ({ setModalView }:
-    { setModalView: React.Dispatch<React.SetStateAction<boolean>> }) => {
+export const ModalTask = ({ setModalView, updateTasksReducer }:
+    { 
+        setModalView: React.Dispatch<React.SetStateAction<boolean>>,
+        updateTasksReducer: React.DispatchWithoutAction
+    }) => {
 
     const { callPostOneTask } = React.useContext(Context);
 
@@ -84,6 +87,7 @@ export const ModalTask = ({ setModalView }:
             />
             <SC.Button onClick={() => {
                 callPostOneTask(inputValue);
+                updateTasksReducer();
                 setModalView(false);
             }}>
                 Salvar

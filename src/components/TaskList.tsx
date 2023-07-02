@@ -7,10 +7,11 @@ import * as FormItems from "../components/FormItems";
 const TaskList = ()=>{
 
     const { callGetTasks } = React.useContext(Context);
-    const [tasksReducer] = React.useReducer( callGetTasks,  callGetTasks());
+    const [tasksReducer, updateTasksReducer] = React.useReducer( callGetTasks,  callGetTasks());
     const [tasks, setTasks] = React.useState<ResponseTasks[] | null>(null);
 
     const [search, setSearch] = React.useState("");
+    const [modalView, setModalView] = React.useState(false);
     
     const filteredTasks = (search.length > 0 && tasks) ?
     tasks.filter(item => item.task.includes(search))
@@ -43,6 +44,22 @@ const TaskList = ()=>{
                 })
                 :
                 <p>Tasks not found</p>
+            }
+
+            <div>
+                <SC.Button onClick={()=> setModalView(!modalView)}>
+                        +
+                </SC.Button>
+            </div>
+
+            {
+                modalView ?
+                <FormItems.ModalTask 
+                    setModalView={setModalView}
+                    updateTasksReducer={updateTasksReducer}
+                />
+                :
+                null
             }
         </SC.Container>
     );
