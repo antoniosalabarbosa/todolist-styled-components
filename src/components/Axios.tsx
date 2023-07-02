@@ -8,6 +8,10 @@ export const getAllTasks = async ()=>{
     return response;
 };
 
+export const postOneTask = async (task: string)=>{
+    await axios.post(BASE_URL, { task: task });
+};
+
 export const putOneTask = async (id: string, task: string)=>{
     await axios({
         method: "PUT",
@@ -15,6 +19,6 @@ export const putOneTask = async (id: string, task: string)=>{
         headers: {
             "Content-Type": "application/json"
         },
-        data: { id: id,task: task }
+        data: { id: id, task: task }
     });
 };
