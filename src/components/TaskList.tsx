@@ -39,6 +39,7 @@ const TaskList = ()=>{
                             key={_id}
                             _id={_id} 
                             task={task} 
+                            updateTasksReducer={updateTasksReducer}
                         />
                     );
                 })

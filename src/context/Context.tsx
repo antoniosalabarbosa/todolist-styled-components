@@ -2,7 +2,8 @@ import React from "react";
 import { 
     getAllTasks, 
     postOneTask,
-    putOneTask
+    putOneTask,
+    deleteOneTask
 } from "../components/Axios";
 
 const value = {
@@ -17,6 +18,10 @@ const value = {
     async callPutOneTask(id: string, task: string){
         return await putOneTask(id, task);
     },
+
+    async callDeleteOneTask(id: string){
+        return await deleteOneTask(id);
+    }
 };
 
 export const Context = React.createContext(value);

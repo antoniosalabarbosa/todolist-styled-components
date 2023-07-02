@@ -22,3 +22,14 @@ export const putOneTask = async (id: string, task: string)=>{
         data: { id: id, task: task }
     });
 };
+
+export const deleteOneTask = async (id: string)=>{
+    await axios({
+        method: "DELETE",
+        url: BASE_URL,
+        headers: {
+            "Content-Type": "application/json"
+        },
+        data: { id: id }
+    });
+};

@@ -1,11 +1,18 @@
 import React from "react";
 import { Context } from "../context/Context";
-import { ResponseTasks } from "../ts/interfaces";
 import * as SC from "../styles/components/TaskStyles";
 
-export const ViewTask = ({ _id, task }: ResponseTasks) => {
+export const ViewTask = ({ _id, task, updateTasksReducer }: 
+    {
+        _id: string,
+        task: string,
+        updateTasksReducer: React.DispatchWithoutAction
+    }) => {
 
-    const { callPutOneTask } = React.useContext(Context);
+    const { 
+        callPutOneTask, 
+        callDeleteOneTask 
+    } = React.useContext(Context);
 
     const [spanView, setSpanView] = React.useState(true);
     const input = React.useRef<HTMLInputElement>();
@@ -57,7 +64,12 @@ export const ViewTask = ({ _id, task }: ResponseTasks) => {
                     </SC.Button>
             }
 
-            <SC.Button>Delete</SC.Button>
+            <SC.Button onClick={()=>{
+                callDeleteOneTask(_id);
+                updateTasksReducer();
+            }}>
+                Delete
+            </SC.Button>
         </SC.LabelBox>
     );
 };
