@@ -1,13 +1,13 @@
 import React from "react";
-import { Context } from "../context/Context";
 import * as SC from "../styles/components/TaskStyles";
-import { ResponseTasks } from "../ts/interfaces";
 import * as FormItems from "../components/FormItems";
+import { Context } from "../context/Context";
+import { ResponseTasks } from "../ts/interfaces";
 
 const TaskList = ()=>{
 
     const { callGetTasks } = React.useContext(Context);
-    const [tasksReducer, updateTasksReducer] = React.useReducer( callGetTasks,  callGetTasks());
+    const [tasksReducer, updateTasksReducer] = React.useReducer(callGetTasks, callGetTasks());
     const [tasks, setTasks] = React.useState<ResponseTasks[] | null>(null);
 
     const [search, setSearch] = React.useState("");
@@ -47,11 +47,7 @@ const TaskList = ()=>{
                 <p>Tasks not found</p>
             }
 
-            <div>
-                <SC.Button onClick={()=> setModalView(!modalView)}>
-                        +
-                </SC.Button>
-            </div>
+            <SC.Button onClick={()=> setModalView(!modalView)}>+</SC.Button>
 
             {
                 modalView ?

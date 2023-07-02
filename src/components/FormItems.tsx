@@ -1,18 +1,15 @@
 import React from "react";
-import { Context } from "../context/Context";
 import * as SC from "../styles/components/TaskStyles";
+import { Context } from "../context/Context";
+import { 
+    ResponseTasks, 
+    MutableRef,
+    ModalTasks
+} from "../ts/interfaces";
 
-export const ViewTask = ({ _id, task, updateTasksReducer }: 
-    {
-        _id: string,
-        task: string,
-        updateTasksReducer: React.DispatchWithoutAction
-    }) => {
+export const ViewTask = ({ _id, task, updateTasksReducer }: ResponseTasks) => {
 
-    const { 
-        callPutOneTask, 
-        callDeleteOneTask 
-    } = React.useContext(Context);
+    const { callPutOneTask, callDeleteOneTask } = React.useContext(Context);
 
     const [spanView, setSpanView] = React.useState(true);
     const input = React.useRef<HTMLInputElement>();
@@ -22,20 +19,17 @@ export const ViewTask = ({ _id, task, updateTasksReducer }:
 
     return (
         <SC.LabelBox htmlFor={_id}>
-            <input
-                type="checkbox"
-                id={_id}
-            />
+            <input type="checkbox" id={_id} />
 
             {
                 spanView
                     ?
-                    <SC.Span ref={span as React.MutableRefObject<HTMLSpanElement>}>
+                    <SC.Span ref={span as MutableRef<HTMLSpanElement>}>
                         {spanValue}
                     </SC.Span>
                     :
                     <SC.Input
-                        ref={input as React.MutableRefObject<HTMLInputElement>}
+                        ref={input as MutableRef<HTMLInputElement>}
                         type="text"
                         value={inputValue}
                         onChange={() => {
@@ -49,9 +43,7 @@ export const ViewTask = ({ _id, task, updateTasksReducer }:
             {
                 spanView
                     ?
-                    <SC.Button onClick={() => setSpanView(!spanView)}>
-                        Edit
-                    </SC.Button>
+                    <SC.Button onClick={() => setSpanView(!spanView)}>Edit</SC.Button>
                     :
                     <SC.Button onClick={() => {
                         if (input.current) {
@@ -66,7 +58,7 @@ export const ViewTask = ({ _id, task, updateTasksReducer }:
 
             <SC.Button onClick={()=>{
                 callDeleteOneTask(_id);
-                updateTasksReducer();
+                if(updateTasksReducer) updateTasksReducer()
             }}>
                 Delete
             </SC.Button>
@@ -74,11 +66,7 @@ export const ViewTask = ({ _id, task, updateTasksReducer }:
     );
 };
 
-export const ModalTask = ({ setModalView, updateTasksReducer }:
-    { 
-        setModalView: React.Dispatch<React.SetStateAction<boolean>>,
-        updateTasksReducer: React.DispatchWithoutAction
-    }) => {
+export const ModalTask = ({ setModalView, updateTasksReducer }: ModalTasks<boolean>) => {
 
     const { callPostOneTask } = React.useContext(Context);
 
@@ -91,12 +79,9 @@ export const ModalTask = ({ setModalView, updateTasksReducer }:
                 ref={input}
                 value={inputValue}
                 placeholder="Task"
-                onChange={()=>{
-                    if(input.current){
-                        setInputValue(input.current.value)
-                    }
-                }}
+                onChange={()=>{ if(input.current) setInputValue(input.current.value) }}
             />
+            
             <SC.Button onClick={() => {
                 callPostOneTask(inputValue);
                 updateTasksReducer();

@@ -6,27 +6,21 @@ import {
     deleteOneTask
 } from "../components/Axios";
 
+import { Children } from "../ts/interfaces";
+
 const value = {
-    async callGetTasks(){
-        return await getAllTasks();
-    },
+    async callGetTasks(){ return await getAllTasks() },
 
-    async callPostOneTask(task: string){
-        return await postOneTask(task);
-    },
+    async callPostOneTask(task: string){ return await postOneTask(task) },
 
-    async callPutOneTask(id: string, task: string){
-        return await putOneTask(id, task);
-    },
+    async callPutOneTask(id: string, task: string){ return await putOneTask(id, task) },
 
-    async callDeleteOneTask(id: string){
-        return await deleteOneTask(id);
-    }
+    async callDeleteOneTask(id: string){ return await deleteOneTask(id) }
 };
 
 export const Context = React.createContext(value);
 
-export const ContextStorage = ({children}: React.PropsWithChildren)=>{
+export const ContextStorage = ({ children }: Children)=>{
     
     return (
         <Context.Provider value={value}>
