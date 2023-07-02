@@ -8,12 +8,12 @@ export const getAllTasks = async ()=>{
     return response;
 };
 
-export const postOneTask = async (task: string)=>{
-    await axios.post(BASE_URL, { task: task });
+export const postOneTask = async (task: string, checked: boolean)=>{
+    await axios.post(BASE_URL, { task: task, checked: checked });
 };
 
-export const putOneTask = async (id: string, task: string)=>{
-    await axios.put(BASE_URL, { id: id, task: task });
+export const putOneTask = async (id: string, task: string, checked: boolean)=>{
+    await axios.put(BASE_URL, { id: id, task: task , checked: checked});
 };
 
 export const deleteOneTask = async (id: string)=>{

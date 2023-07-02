@@ -18,6 +18,11 @@ export const ViewTask = ({ _id, task, checked, updateTasksReducer }: ResponseTas
     const [spanValue, setSpanValue] = React.useState(task);
     const [checkedValue, setCheckedValue] = React.useState(checked);
 
+    const handleChecked = ()=>{
+        setCheckedValue(!checkedValue);
+        callPutOneTask(_id, task, !checkedValue);
+    };
+
     return (
         <SC.LabelBox 
             htmlFor={_id} 
@@ -27,8 +32,8 @@ export const ViewTask = ({ _id, task, checked, updateTasksReducer }: ResponseTas
             <input 
                 type="checkbox" 
                 id={_id}
-                checked={checkedValue}
-                onChange={e => setCheckedValue(e.target.checked)}
+                checked={checkedValue || false}
+                onChange={handleChecked}
             />
 
             {
@@ -57,7 +62,7 @@ export const ViewTask = ({ _id, task, checked, updateTasksReducer }: ResponseTas
                     :
                     <SC.Button onClick={() => {
                         if (input.current) {
-                            callPutOneTask(_id, input.current.value);
+                            callPutOneTask(_id, input.current.value, checkedValue);
                             setSpanView(!spanView);
                             setSpanValue(input.current.value);
                         }
@@ -97,7 +102,7 @@ export const ModalTask = ({ setModalView, updateTasksReducer }: ModalTasks<boole
                 disabled={input.current && (input.current.value !== "") ? false : true}
                 onClick={() => {
                     if(input.current && (input.current.value !== "")){
-                        callPostOneTask(inputValue);
+                        callPostOneTask(inputValue, false);
                         updateTasksReducer();
                         setModalView(false);
                 }
