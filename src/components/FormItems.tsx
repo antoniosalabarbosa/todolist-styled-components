@@ -74,21 +74,26 @@ export const ModalTask = ({ setModalView, updateTasksReducer }: ModalTasks<boole
     const input = React.useRef<HTMLInputElement | null>(null);
 
     return (
-        <div>
+        <SC.DivContainer id="modal">
             <SC.Input
                 ref={input}
                 value={inputValue}
                 placeholder="Task"
+                required
                 onChange={()=>{ if(input.current) setInputValue(input.current.value) }}
             />
             
-            <SC.Button onClick={() => {
-                callPostOneTask(inputValue);
-                updateTasksReducer();
-                setModalView(false);
+            <SC.Button 
+                disabled={input.current && (input.current.value !== "") ? false : true}
+                onClick={() => {
+                    if(input.current && (input.current.value !== "")){
+                        callPostOneTask(inputValue);
+                        updateTasksReducer();
+                        setModalView(false);
+                }
             }}>
                 Salvar
             </SC.Button>
-        </div>
+        </SC.DivContainer>
     );
 };

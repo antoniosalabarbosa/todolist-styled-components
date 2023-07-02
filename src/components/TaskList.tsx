@@ -25,8 +25,10 @@ const TaskList = ()=>{
     return (
         <SC.Container>
 
-            <SC.Input 
+            <SC.Input
+                id="search"
                 type="text"
+                placeholder="Search task..."
                 onChange={e => setSearch(e.target.value)}
                 value={search}
             />
@@ -44,10 +46,12 @@ const TaskList = ()=>{
                     );
                 })
                 :
-                <p>Tasks not found</p>
+                <p></p>
             }
 
-            <SC.Button onClick={()=> setModalView(!modalView)}>+</SC.Button>
+            <SC.Button onClick={()=> setModalView(!modalView)} id="newTask">
+                { modalView ? "-" : "+" }
+            </SC.Button>
 
             {
                 modalView ?

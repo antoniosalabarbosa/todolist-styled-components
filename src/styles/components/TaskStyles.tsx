@@ -2,16 +2,22 @@ import { styled } from "styled-components";
 import { $blue0, $white, $gray } from "../variables";
 
 export const Container = styled.div`
-    width: 100vw;
+    width: 90vw;
     max-width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
 `;
 
+export const DivContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
 export const LabelBox = styled.label`
     width: 100%;
-    margin: 0 0 10px 0;
+    margin: 10px 0;
     display: grid;
     grid-template-columns: 30px clamp(50px, 50vw, 300px) 1fr 1fr;
     align-items: center;
@@ -19,9 +25,11 @@ export const LabelBox = styled.label`
 `;
 
 export const Span = styled.span`
-    width: 100vw;
-    max-width: 400px;
+    max-width: 300px;
+    margin: 0 10px 0 0;
     font-size: 1.5rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 `;
 
 export const Input = styled.input`
@@ -35,4 +43,5 @@ export const Button = styled.button`
     color: ${$white};
     font-size: 1rem;
     background-color: ${$blue0};
+    cursor: pointer;
 `;

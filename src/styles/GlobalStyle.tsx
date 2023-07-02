@@ -38,12 +38,30 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h1{
-        margin: 0 0 40px 0;
         border-bottom: 3px solid ${ variables.$black };
         padding: 10px 20px;
         font-size: 2rem;
         text-align: center;
         text-transform: uppercase;
+    }
+
+    #search{
+        margin: 20px 0;
+        width: 90vw;
+        max-width: 600px;
+    }
+
+    #modal{
+        margin: 20px 0 0 0;
+    }
+
+    #modal input{
+        margin: 0 10px 0 0;
+    }
+
+    #newTask{
+        margin: 20px 0;
+        font-size: 2rem;
     }
 `;
 
